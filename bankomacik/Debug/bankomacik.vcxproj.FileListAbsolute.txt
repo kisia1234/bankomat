@@ -1,0 +1,2 @@
+C:\Users\pykap\Documents\GitHub\bankomat\bankomacik\Debug\bankomacik.exe
+C:\Users\pykap\Documents\GitHub\bankomat\bankomacik\Debug\bankomacik.pdb
