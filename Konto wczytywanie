@@ -1,0 +1,94 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+struct Konto {
+    std::string numer;
+    std::string imie;
+    std::string nazwisko;
+    long saldo;
+    std::string PIN;
+    bool czy_zablokowane;
+};
+
+
+void wczytaj(Konto* tab) {
+
+    int c = 0; //counter
+
+    fstream plik;
+    string linia;
+    plik.open("baza danych.txt", ios::in | ios::out);
+    if (plik.good() == true) {
+        for (;;) {
+
+            
+            getline(plik, linia);
+           
+            if (linia=="*END")
+                break;
+            tab[c].numer = linia;
+
+            getline(plik, linia);
+            tab[c].imie = linia;
+
+            getline(plik, linia);
+            tab[c].nazwisko = linia;
+
+            getline(plik, linia);
+            tab[c].saldo = stol(linia);
+
+            getline(plik, linia);
+            tab[c].PIN = linia;
+
+            getline(plik, linia);
+            if (linia[0] == '1')
+                tab[c].czy_zablokowane = true;
+            else
+                tab[c].czy_zablokowane = false;
+
+            c++;
+            if (c == 10) {
+                cout << "Przekroczenie limitu bazy danych" << endl;
+                break;
+
+            }
+
+
+
+            getline(plik, linia);//skip blank line
+
+
+
+
+
+
+        }
+        plik.close();
+    }
+}
+
+    int main(){
+
+        Konto tab[10];
+
+        wczytaj(tab);
+
+
+        for (int i = 0; i < 4; i++) {
+            cout << tab[i].numer << endl;
+            cout << tab[i].imie << endl;
+            cout << tab[i].nazwisko << endl;
+            cout << tab[i].saldo << endl;
+            cout << tab[i].PIN << endl;
+            cout << tab[i].czy_zablokowane << endl;
+            cout << "###########################" << endl;
+
+        }
+
+
+
+
+        return 0;
+    }
